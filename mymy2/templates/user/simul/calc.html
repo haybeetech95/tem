@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Candidate Position admin Portal</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+     <style type="text/css">
+.navbar{
+     		background-color: #2b71c2b3;
+     	}
+     	.navbar-brand{
+     		font-size: 200%;
+     		font-family: Times New Roman;
+     		color:white;
+     	}
+     	navbar-nav{
+     		text-align: left;
+     	}
+     	.navbar{
+     		width:100%;
+     	}
+     	body{
+     		width: 100%;
+     	}
+     	.nav-link{
+     		font-size:150%;
+     		color: white;
+     		text-align: left;
+     	}
+     	a{
+     		color: black;
+     	}
+     	a:hover{
+		color:#0311d6e8;
+	}
+	.thead{
+		background-color: #2b71c2b3;
+		text-align: center;
+	}
+	.thead a{
+		color: white;
+	}
+	table{
+		width:100%;
+	}
+	.navhead{
+		background-color: #2b71c2b3;
+		width:125%;
+	}
+	.cont{
+		padding: 5%;
+		padding-left:3%;
+	}
+	.btn{
+		color: white;
+	}
+	.fulfil{
+		
+		text-align: center;
+	}
+	#table{
+		margin-left: 10%;
+		margin-right: 10%;
+		width: 100px;
+	}
+	h6{
+		width:100%;
+		text-align: center;
+	}
+	.row{
+		width: 100%;
+		text-align: center;
+	}
+	.row h1{
+		width: 100%;
+		text-align: center;
+	}
+	.col a{
+		font-size: 150%;
+	}
+	.sample{
+		width: 100%;
+		padding:10%;
+		padding-top:5%;
+		padding-bottom:5%;
+	}
+	.sample h3{
+		width: 100%;
+		text-align: center;
+		padding-bottom: 10%;
+	}
+	.sample h5{
+		width: 100%;
+		text-align: center;
+		padding-bottom: 10%;
+	}
+	.exp{
+		width: 100%;
+		text-align: center;
+	}
+    </style> 	
+</head>
+<body>
+
+
+ <nav class="navbar">
+        <!-- Brand -->
+        <a class="navbar-brand" th:href="@{/dashboard}">HayBee TECH</a>
+      
+      
+        <!-- Navbar links -->
+       
+          <ul class="nav">
+            <li class="nav-item">
+        <a class="nav-link" th:href="@{/dashboard}">Home</a>
+      </li>
+     
+            <li class="nav-item">
+        <a class="nav-link active" th:href="@{/logout}" >Logout</a>
+      </li>
+          </ul>
+      </nav>
+      
+
+	<div class = "cont">
+		<div class = "row">
+			<h1>HayBee's Simultaneous Equation Solver</h1>
+		</div>
+		
+		<div class="sample" style="padding: 30%; padding-top: 5%; padding-bottom: 5%;">
+		<h3>Please follow the instruction below to avoid error</h3>
+		<h5>X must be alone before you can use this solver</h5>
+		<h5>No value should be beside x</h5>
+			<table class="table table-borderless" id="table">
+  <tbody>
+    <tr>
+       <td>x</td>
+      <td>+</td>
+      <td>2y</td>
+      <td>=</td>
+      <td>9</td>
+      <td>Equation 1</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="table table-borderless" id="table">
+  <tbody>
+    <tr>
+       <td>x</td>
+      <td>-</td>
+      <td>y</td>
+      <td>=</td>
+      <td>3</td>
+        <td>Equation 2</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+<div class="exp">
+		<h5>a = the number beside x in equation 1</h5>
+		<h6>In the example above a = 1</h6>
+
+       <h5>b = the number beside y in equation 1</h5>
+       <h6>In the example above b = 2</h6>
+
+       <h5>c = the number after the equality sign in equation 1</h5>
+       <h6>In the example above c = 9</h6>
+
+       <h5>d = the number beside x in equation 2</h5>
+       <h6>In the example above d = 1</h6>
+
+       <h5>e = the number beside y in equation 2</h5>
+       <h6>In the example above e = -1</h6>
+
+       <h5>f = the number after the equality sign in equation 2</h5>
+       <h6>In the example above f = 3</h6>
+
+</div>     <br><br>
+  
+		
+		
+		<div class = "row">
+			<div class = "col">
+				<a th:href ="@{/calc/new}" class = "btn btn-primary btn-sm mb-3">Click to solve</a>
+			</div>
+		</div>
+		
+		
+							
+	<div  th:each = "calc: ${listCalcs}"  style="margin-left: 5%; margin-right: 5%;">
+	
+	<br><br><br><h5 style="text-align: center;">The dark table below shows the list of question numbers answered</h5>
+	<h5 style="text-align: center;">Scroll to the top for the first question</h5>
+	<h5 style="text-align: center;">Scroll to the bottom for the next question</h5>
+
+	<div  th:each = "calc: ${listCalcs}" >
+
+	<table class = "table table-dark table-striped">
+			<thead class = "thead" style="background-color: black; color: white;">
+				<tr >
+					<th scope="col"> Question number</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr>
+				<td th:text = "${calc.rollNo}" style="text-align: center; "></td>
+				
+				</tr>
+				
+			</tbody>
+		</table>
+	
+		</div>
+	
+		
+		
+		<br><br>
+		
+		
+
+		
+		
+		<div class="sample" style=" color: black; background-color:  #2b71c2b3;">
+		
+		<h3 style=" width: 100%; color: white; text-align: center; margin-left: 0%; margin-right: 0%;">
+ ANSWER TO QUESTION NUMBER : <a th:text = "${calc.rollNo}" ></a> STARTS FROM HERE</h3><br>
+ 
+ <table class = "table table-bordered table-striped">
+			<thead class = "thead">
+				<tr>
+					<th scope="col">Index</th>
+					<th scope="col">a</th>
+					<th scope="col">b</th>
+					<th scope="col">c</th>
+					<th scope="col">d</th>
+					<th scope="col">e</th>
+					<th scope="col">f</th>
+					<th scope="col">The value of y</th>
+					<th scope="col">The value of x</th>
+					
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr>
+					<td th:text = "${calc.rollNo}"></td>
+					<td th:text = "${calc.s1}"></td>
+					<td th:text = "${calc.s2}"></td>
+					<td th:text = "${calc.s3}"></td>
+					<td th:text = "${calc.s4}"></td>
+					<td th:text = "${calc.s5}"></td>
+					<td th:text = "${calc.s6}"></td>
+					<td th:text = "${calc.step10()}"></td>
+					<td th:text = "${calc.step14()}"></td>
+					
+					
+					<td>
+						<a th:href = "@{/calc/edit/{id}(id=${calc.id})}" 
+						class = "btn btn-primary">Update</a><br><br>
+						
+						<a th:href = "@{/calc/{id}(id=${calc.id})}" 
+						class = "btn btn-danger">Delete</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+ 
+ 
+			<table class="table table-borderless" id="table">
+				
+			<h5>The Question</h5>
+  <tbody>
+    <tr>
+       <td th:text = "${calc.s1 + 'x'}"></td>
+      <td th:text = "' + '"></td>
+      <td th:text = "${calc.s2} + 'y'"></td>
+      <td th:text = "' = '"></td>
+      <td th:text = "${calc.s3}"></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>Equation 1</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="table table-borderless" id="table">
+  <tbody>
+    <tr>
+       <td th:text = "${calc.s4 + 'x'}"></td>
+      <td th:text = "' + '"></td>
+      <td th:text = "${calc.s5} + 'y'"></td>
+      <td th:text = "' = '"></td>
+      <td th:text = "${calc.s6}"></td>
+      <td></td>
+      <td></td>
+      <td></td>
+        <td>Equation 2</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+		
+		
+		
+		<div class="working" style=" color: black;  background-color: rgba(158, 146, 105, 0.282);
+		padding-left: 20%; padding-right: 20%;">
+		
+			<table class="table table-borderless" id="table">
+  <tbody>
+    <tr>
+    <th scope="row">Step 1</th>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td th:text = "${calc.s1 + 'x'}"></td>
+      <td th:text = "' + '"></td>
+      <td th:text = "${calc.s2} + 'y'"></td>
+      <td th:text = "' = '"></td>
+      <td th:text = "${calc.s3}"></td>
+      <td></td>
+      <td></td>
+       <td></td>
+       <td></td>
+      <td th:text = "'Equation 1'"></td>
+      </tr>
+      <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td th:text = "${calc.s4 + 'x'}"></td>
+      <td th:text = "' + '"></td>
+      <td th:text = "${calc.s5} + 'y'"></td>
+      <td th:text = "' = '"></td>
+      <td th:text = "${calc.s6}"></td>
+      <td></td>
+      <td></td>
+       <td></td>
+       <td></td>
+      <td th:text = "'Equation 2'"></td>
+      </tr>
+  </tbody>
+</table>	
+
+
+
+
+<table class="table table-borderless" id="table">
+<h6>1.0x is the same as just x. In the next line the 1.0x in equation one here will be re-written as x</h6>
+  <tbody>
+    <tr>
+    <th scope="row">Step 2</th>
+       <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td th:text = "'x'"></td>
+      <td th:text = "' + '"></td>
+      <td th:text = "'(' + ${calc.s2} + ')y'"></td>
+      <td th:text = "' = '"></td>
+      <td th:text = "${calc.s3}"></td>
+      
+    </tr>
+  </tbody>
+</table>
+<h6>In the next line we would make x stand alone by moving y and its coefficient to the other side</h6>
+	
+
+
+<table class="table table-borderless" id="table">
+  <tbody>
+    <tr>
+    <th scope="row">Step 3</th>
+       <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td th:text = "'x'"></td>
+      <td th:text = "' = '"></td>
+      <td th:text = "${calc.s3}"></td>
+      <td th:text = "' - '"></td>
+      <td th:text = "'(' + ${calc.s2} + ')y'"></td>
+      <td></td>
+      <td></td>
+      <td></td>
+       <td></td>
+       <td></td>
+      <td th:text = "'Equation 3'"></td>
+      
+    </tr>
+  </tbody>
+</table>
+<h6>x now stands alone. This now becomes equation 3</h6>		
+
+
+<table class="table table-borderless" id="table">
+<h6>We would continue by rewritting equation 2</h6>	
+  <tbody>
+    <tr>
+    <th scope="row">Step 4</th>
+       <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td th:text = "${calc.s4 + 'x'}"></td>
+      <td th:text = "' + '"></td>
+      <td th:text = "${calc.s5} + 'y'"></td>
+      <td th:text = "' = '"></td>
+      <td th:text = "${calc.s6}"></td>
+      
+    </tr>
+  </tbody>
+</table>
+<h6>1.0x is the same as just x. In the next line the 1.0x in equation two here will be re-written as x</h6>
+
+
+<table class="table table-borderless" id="table">
+  <tbody>
+    <tr>
+    <th scope="row">Step 5</th>
+       <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td th:text = "'x'"></td>
+      <td th:text = "' + '"></td>
+      <td th:text = "${calc.s5} + 'y'"></td>
+      <td th:text = "' = '"></td>
+      <td th:text = "${calc.s6}"></td>
+  </tbody>
+</table>
+
+
+<table class="table table-borderless" id="table">
+<h6>In the next line, we would remove x and input the value of x that we got in equation 3</h6>
+  <tbody>
+    <tr>
+    <th scope="row">Step 6</th>
+       <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td th:text = "${calc.s3}"></td>
+      <td th:text = "' - '"></td>
+      <td th:text = "'(' + ${calc.s2} + ')y'"></td>
+      <td th:text = "' + '"></td>
+      <td th:text = "${calc.s5} + y"></td>
+      <td th:text = "' = '"></td>
+      <td th:text = "${calc.s6}"></td>
+      
+    </tr>
+  </tbody>
+</table>
+
+
+<table class="table table-borderless" id="table">
+<h6>We would add up the values of y because they are like terms</h6>
+  <tbody>
+    <tr>
+    <th scope="row">Step 7</th>
+       <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td th:text = "${calc.s3}"></td>
+      <td th:text = "' + '"></td>
+      <td th:text="${calc.step7()} + 'y'"><td/>
+      <td th:text = "' = '"></td>
+      <td th:text = "${calc.s6}"></td>
+      
+    </tr>
+  </tbody>
+</table>
+
+
+<table class="table table-borderless" id="table">
+<h6>In the next line, we would move the value without y to the other side<br>
+ since its a like term with the value at the other side</h6>
+  <tbody>
+    <tr>
+    <th scope="row">Step 8</th>
+       <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td th:text="${calc.step7()} + 'y'"><td/>
+      <td th:text = "' = '"></td>
+      <td th:text = "${calc.s6}"></td>
+      <td th:text = "' - '"></td>
+      <td th:text = "${calc.s3}"></td>
+     
+      
+    </tr>
+  </tbody>
+</table>
+
+
+<table class="table table-borderless" id="table">
+<h6>We would now subtract the like terms</h6>
+  <tbody>
+    <tr>
+    <th scope="row">Step 9</th>
+       <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td th:text="${calc.step7()} + 'y'"><td/>
+      <td th:text = "' = '"></td>
+       <td th:text="${calc.step9()}"><td/>
+      
+    </tr>
+  </tbody>
+</table>
+
+
+<table class="table table-borderless" id="table">
+<h6>In the next line, we would make y stand alone by<br>
+dividing both sides with the coefficient of y</h6>
+  <tbody>
+    <tr>
+    <th scope="row">Step 9</th>
+       <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td th:text="'y'"><td/>
+      <td th:text = "' = '"></td>
+       <td th:text="${calc.step9()}"><td/>
+       <td th:text = "' / '"></td>
+       <td th:text="${calc.step7()}"><td/>
+    </tr>
+  </tbody>
+</table>
+
+
+<table class="table table-borderless" id="table">
+<h6>We now divide now</h6>
+  <tbody>
+    <tr>
+    <th scope="row">Step 10</th>
+       <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td th:text="'y'"><td/>
+      <td th:text = "' = '"></td>
+       <td th:text="${calc.step10()}"><td/>
+    </tr>
+  </tbody>
+</table>
+<h6>This is the answer for y</h6>
+
+<h2>Now Let's Solve For X</h2>
+<h3>We would start by writing out equation 3 </h3>
+
+
+<table class="table table-borderless" id="table">
+  <tbody>
+    <tr>
+    <th scope="row">Step 11</th>
+       <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td th:text = "'x'"></td>
+      <td th:text = "' = '"></td>
+      <td th:text = "${calc.s3}"></td>
+      <td th:text = "' - '"></td>
+      <td th:text = "${calc.s2} + 'y'"></td>
+    </tr>
+  </tbody>
+</table>
+<h6>This is equation 3</h6>
+
+<h4>Replace y with the answer we got for y</h4>
+<h4>Look at step 10 so you can see the answer we got for y</h4>	
+
+
+<table class="table table-borderless" id="table">
+  <tbody>
+    <tr>
+    <th scope="row">Step 12</th>
+       <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td th:text = "'x'"></td>
+      <td th:text = "' = '"></td>
+      <td th:text = "${calc.s3}"></td>
+      <td th:text = "' - '"></td>
+      <td th:text = "${calc.s2}"></td>
+      <td th:text="'(' + ${calc.step10()} + ')'"><td/>
+    </tr>
+  </tbody>
+</table>
+<h6>Here, we would remove y and replace it with the value of y we got</h6>
+<h6>Then we multiply it with the value outside the bracket</h6>
+
+
+<table class="table table-borderless" id="table">
+  <tbody>
+    <tr>
+    <th scope="row">Step 13</th>
+       <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td th:text = "'x'"></td>
+      <td th:text = "' = '"></td>
+      <td th:text = "${calc.s3}"></td>
+      <td th:text = "' - '"></td>
+      <td th:text="${calc.step13()}"><td/>
+    </tr>
+  </tbody>
+</table>
+<h6>We can now subtract</h6>
+
+
+
+<table class="table table-borderless" id="table">
+  <tbody>
+    <tr>
+    <th scope="row">Step 14</th>
+       <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td th:text = "'x'"></td>
+      <td th:text = "' = '"></td>
+      <td th:text="${calc.step14()}"><td/>
+    </tr>
+  </tbody>
+</table>
+<h6>This is the answer for x</h6>
+<h6>The answer for both y and x is stated below</h6>
+
+
+
+<table class="table table-borderless" id="table">
+  <tbody>
+    <tr>
+    <th scope="row">Final answer</th>
+       <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td th:text = "'y'"></td>
+      <td th:text = "' = '"></td>
+      <td th:text="${calc.step10()}"><td/>
+      <td></td>
+      <td></td>
+      <td th:text = "'x'"></td>
+      <td th:text = "' = '"></td>
+      <td th:text="${calc.step14()}"><td/>
+      <td></td>
+      <td></td>
+      <td></td>
+       <td></td>
+       <td></td>
+      
+    </tr>
+  </tbody>
+</table>
+
+<div>
+<div class="sample" style=" color: black; background-color:  #2b71c2b3;">
+		
+		<h3 style=" width: 100%;color: white; text-align: center; margin-left: 0%; margin-right: 0%;">
+ ANSWER TO QUESTION NUMBER : <a th:text = "${calc.rollNo}"></a> ENDS HERE</h3><br>
+ </div>
+		
+		</div>
+
+		</div>
+		
+		
+		</div>
+</body>
+</html>

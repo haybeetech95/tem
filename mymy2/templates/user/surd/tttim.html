@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Calculator</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+     <style type="text/css">
+.navbar{
+     		background-color: #2b71c2b3;
+     	}
+     	.navbar-brand{
+     		font-size: 200%;
+     		font-family: Times New Roman;
+     		color:white;
+     	}
+     	navbar-nav{
+     		text-align: left;
+     	}
+     	.navbar{
+     		width:100%;
+     	}
+     	body{
+     		width: 100%;
+     	}
+     	.nav-link{
+     		font-size:150%;
+     		color: white;
+     		text-align: left;
+     	}
+     	a{
+     		color: black;
+     	}
+     	a:hover{
+		color:#0311d6e8;
+	}
+	.thead{
+		background-color: #2b71c2b3;
+		text-align: center;
+	}
+	.thead a{
+		color: white;
+	}
+	table{
+		width:100%;
+	}
+	.navhead{
+		background-color: #2b71c2b3;
+		width:125%;
+	}
+	.cont{
+		padding: 5%;
+	}
+	.btn{
+		color: white;
+	}
+	.fulfil{
+		
+		text-align: center;
+	}
+	#table td{
+		width: 100px
+	}
+	h6{
+		width:100%;
+		text-align: center;
+	}
+	.row{
+		width: 100%;
+		text-align: center;
+	}
+	.row h1{
+		width: 100%;
+		text-align: center;
+	}
+	.col a{
+		font-size: 150%;
+	}
+	.sample{
+		width: 100%;
+		padding:30%;
+		padding-top:5%;
+		padding-bottom:5%;
+	}
+	.sample h3{
+		width: 100%;
+		text-align: center;
+		padding-bottom: 4%;
+	}
+	.sample h5{
+		width: 100%;
+		text-align: center;
+	}
+	.working{
+		width: 100%;
+		padding:30%;
+		padding-top:5%;
+		padding-bottom:5%;
+	}
+	
+	.exp{
+		width: 100%;
+		text-align: center;
+	}
+    </style> 	
+</head>
+<body>
+
+
+ <nav class="navbar">
+        <!-- Brand -->
+        <a class="navbar-brand" th:href="@{/dashboard}">HayBee TECH</a>
+      
+      
+        <!-- Navbar links -->
+       
+          <ul class="nav">
+            <li class="nav-item">
+        <a class="nav-link" th:href="@{/dashboard}">Home</a>
+      </li>
+     
+            <li class="nav-item">
+        <a class="nav-link active" th:href="@{/logout}" >Logout</a>
+      </li>
+          </ul>
+      </nav>
+      
+
+<div class = "cont">
+	<div class = "row">
+		<h1>HayBee's Surd Solver</h1>
+		<h3 style=" width: 100%; text-align: center;">Operations in surds</h3>
+	</div>
+		
+	<div class="sample" style=" width: 100%; text-align: center; padding: 0;">
+		<h3>Please follow the instruction below to avoid error</h3>
+		<h3>Question sample</h3>
+		<h5>Solve <span>&#8730;</span><span  style="border-top: 1px solid black">72</span> * 
+			<span>&#8730;</span><span  style="border-top: 1px solid black">24</span>
+		
+		</h5><br>
+		
+	</div>
+
+<br><br> 
+  
+		
+		
+		<div class = "row">
+			<div class = "col">
+				<a th:href ="@{/calctdtttim/new}" class = "btn btn-primary btn-sm mb-3">Click to solve</a>
+			</div>
+		</div>
+		
+		
+		
+				
+	<div  th:each = "calctdsu: ${listCalctdsus}"  style="margin-left: 5%; margin-right: 5%;">
+	
+	<br><br><br><h5 style="text-align: center;">The dark table below shows the list of question numbers answered</h5>
+	<h5 style="text-align: center;">Scroll to the top for the first question</h5>
+	<h5 style="text-align: center;">Scroll to the bottom for the next question</h5>
+
+<div  th:each = "calctdsu: ${listCalctdsus}" >
+
+	<table class = "table table-dark table-striped">
+			<thead class = "thead" style="background-color: black; color: white;">
+				<tr >
+					<th scope="col"> Question number</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr>
+				<td th:text = "${calctdsu.rollNo}" style="text-align: center; "></td>
+				<td>
+						<a th:href = "@{/calctdtttim/{id}(id=${calctdsu.id})}" 
+						class = "btn btn-danger">Delete</a>
+					</td>
+				</tr>
+				
+			</tbody>
+		</table>
+	
+</div>
+	
+		
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	
+		
+		
+		
+		<div class="working" style=" color: black;  background-color: rgba(158, 146, 105, 0.282);
+		padding-left: 10%; padding-right: 10%; text-align: center;">
+		
+		
+			
+		
+		<div class="sample" style=" color: black; background-color:  #2b71c2b3;  padding: 0; padding-top: 5%;">
+
+
+			<div style=" text-align: center; font-size: 150%;  color: white; " >
+	<br><br>
+
+<div style=" width: 100%; margin: 0;">	
+	<h3 style=" width: 100%;  color: white; text-align: center; margin-left: 0%; margin-right: 0%;">
+ ANSWER TO QUESTION NUMBER : <a th:text = "${calctdsu.rollNo}" ></a> STARTS FROM HERE</h3><br>		
+	</div>
+	
+	
+	<table class = "table table-bordered table-striped">
+			<thead class = "thead">
+				<tr>
+					<th scope="col">Question Number</th>
+					<th scope="col" colspan="3">Numbers from the question</th>
+					
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr>
+					<td th:text = "${calctdsu.rollNo}" rowspan="2"></td>
+					<td>First Number</td>
+					<td>Second Number</td>
+					<td>Third Number</td>
+				</tr>
+				
+				<tr>
+					<td th:text = "${calctdsu.s1}"></td>
+					<td th:text = "${calctdsu.s2}"></td>
+					<td th:text = "${calctdsu.s3}"></td>
+				</tr>
+				
+				
+			</tbody>
+		</table><br>
+		
+		
+		<br><br>
+		
+		
+			</div>
+
+</div>
+		
+		<h5>Step 1</h5><br>
+		<h5>Write out the values given in the question</h5><br>
+		
+		<p><span>&#8730;</span><span  style="border-top: 1px solid black"><a th:text = "${calctdsu.s1}"></a></span> * 
+		 	<span>&#8730;</span><span  style="border-top: 1px solid black"><a th:text = "${calctdsu.s2}"></a></span>
+		
+		</p>
+		<br>
+		
+		
+		
+		<h5>Step 2</h5>
+		<h5>Break it down</h5>
+		
+		<p> = (<span>&#8730;</span><span  style="border-top: 1px solid black">
+		<a th:text = "${calctdsu.su()}"></a> * <a th:text = "${calctdsu.su2()}"></a> * <a th:text = "${calctdsu.su3()}"></a>
+		 * <a th:text = "${calctdsu.su4()}"></a> * <a th:text = "${calctdsu.su5()}"></a> * <a th:text = "${calctdsu.su6()}"></a>
+		  * <a th:text = "${calctdsu.su7()}"></a> * <a th:text = "${calctdsu.su8()}"></a> * <a th:text = "${calctdsu.su9()}"></a>
+		    * <a th:text = "${calctdsu.su10()}"></a></span>) * 
+		    
+		    
+		    (<span>&#8730;</span><span  style="border-top: 1px solid black">
+		<a th:text = "${calctdsu.bsu()}"></a> * <a th:text = "${calctdsu.bsu2()}"></a> * <a th:text = "${calctdsu.bsu3()}"></a>
+		 * <a th:text = "${calctdsu.bsu4()}"></a> * <a th:text = "${calctdsu.bsu5()}"></a> * <a th:text = "${calctdsu.bsu6()}"></a>
+		  * <a th:text = "${calctdsu.bsu7()}"></a> * <a th:text = "${calctdsu.bsu8()}"></a> * <a th:text = "${calctdsu.bsu9()}"></a>
+		    * <a th:text = "${calctdsu.bsu10()}"></a></span>)
+		 <br><br>
+		 
+		 Write one piece of every number appearing twice outside the root sign
+		 <br><br>
+		 = 
+		(<a th:text = "${calctdsu.app2()}"></a> * <a th:text = "${calctdsu.app3()}"></a>
+		 * <a th:text = "${calctdsu.app5()}"></a> * <a th:text = "${calctdsu.app7()}"></a> * <a th:text = "${calctdsu.app11()}"></a>
+		  * <a th:text = "${calctdsu.app13()}"></a> * <a th:text = "${calctdsu.app17()}"></a>
+		  <span>&#8730;</span><span  style="border-top: 1px solid black">
+		   <a th:text = "${calctdsu.left2()}"></a> * <a th:text = "${calctdsu.left3()}"></a> * <a th:text = "${calctdsu.left5()}"></a>
+		    * <a th:text = "${calctdsu.left7()}"></a></span>) *
+		    
+		    	(<a th:text = "${calctdsu.bapp2()}"></a> * <a th:text = "${calctdsu.bapp3()}"></a>
+		 * <a th:text = "${calctdsu.bapp5()}"></a> * <a th:text = "${calctdsu.bapp7()}"></a> * <a th:text = "${calctdsu.bapp11()}"></a>
+		  * <a th:text = "${calctdsu.bapp13()}"></a> * <a th:text = "${calctdsu.bapp17()}"></a>
+		  <span>&#8730;</span><span  style="border-top: 1px solid black">
+		   <a th:text = "${calctdsu.bleft2()}"></a> * <a th:text = "${calctdsu.bleft3()}"></a> * <a th:text = "${calctdsu.bleft5()}"></a>
+		    * <a th:text = "${calctdsu.bleft7()}"></a></span>)
+		 <br>
+		 
+		= 
+		 <a th:text = "${calctdsu.tttabmul()}"></a>
+		  <span>&#8730;</span><span  style="border-top: 1px solid black">
+		  <a th:text = "${calctdsu.tttableft()}"></a>
+		  </span>
+		  <br>
+		  
+		  Break down <a th:text = "${calctdsu.tttableft()}"></a><br>
+		  
+		  =
+		  
+		  <a th:text = "${calctdsu.tttabmul()}"></a>
+		  (<span>&#8730;</span><span  style="border-top: 1px solid black">
+		  <a th:text = "${calctdsu.tttableft()}"></a>
+		  </span>)<br>
+		  
+		  =
+		  <a th:text = "${calctdsu.tttabmul()}"></a>
+		  (<span>&#8730;</span><span  style="border-top: 1px solid black">
+		<a th:text = "${calctdsu.tttsu()}"></a> * <a th:text = "${calctdsu.tttsu2()}"></a> * <a th:text = "${calctdsu.tttsu3()}"></a>
+		 * <a th:text = "${calctdsu.tttsu4()}"></a> * <a th:text = "${calctdsu.tttsu5()}"></a> * <a th:text = "${calctdsu.tttsu6()}"></a>
+		  * <a th:text = "${calctdsu.tttsu7()}"></a> * <a th:text = "${calctdsu.tttsu8()}"></a> * <a th:text = "${calctdsu.tttsu9()}"></a>
+		    * <a th:text = "${calctdsu.tttsu10()}"></a></span>)<br>
+		    
+		    
+		    
+		    = 
+		    
+		    <a th:text = "${calctdsu.tttabmul()}"></a>
+		  (<a th:text = "${calctdsu.tttapp2()}"></a> * <a th:text = "${calctdsu.tttapp3()}"></a>
+		 * <a th:text = "${calctdsu.tttapp5()}"></a> * <a th:text = "${calctdsu.tttapp7()}"></a> * <a th:text = "${calctdsu.tttapp11()}"></a>
+		  * <a th:text = "${calctdsu.tttapp13()}"></a> * <a th:text = "${calctdsu.tttapp17()}"></a>
+		  <span>&#8730;</span><span  style="border-top: 1px solid black">
+		   <a th:text = "${calctdsu.tttleft2()}"></a> * <a th:text = "${calctdsu.tttleft3()}"></a> * <a th:text = "${calctdsu.tttleft5()}"></a>
+		    * <a th:text = "${calctdsu.tttleft7()}"></a></span>
+		   
+		  
+		 <br><br>
+		 
+		   Ignore the excessive * and 1<br>
+		   Also ignore the 0 <span>&#8730;</span><span  style="border-top: 1px solid black">0</span>
+		   
+		 
+		 </p><br>
+		 
+		 
+		 
+		
+
+<div class="sample" style=" color: black; background-color:  #2b71c2b3;">
+			
+
+<div style=" width: 100%; margin: 0;">	
+	
+	<h3 style=" width: 100%; color: white; text-align: center; margin-left: 0%; margin-right: 0%;  padding-left: 0; padding-right: 0;">
+ ANSWER TO QUESTION NUMBER : <a th:text = "${calctdsu.rollNo}" ></a> ENDS HERE</h3><br>	<br>
+ 
+	</div>
+
+</div>
+
+
+		</div>
+		
+		
+		
+		</div>
+</body>
+</html>
